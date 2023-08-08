@@ -9,6 +9,37 @@ import { PersonModule } from './person/person.module';
 @Module({
   imports: [AModule, RModule, PersonModule],
   controllers: [AppController, CController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: AppService,
+      useClass: AppService,
+    },
+    {
+      provide: 'person',
+      useValue: {
+        name: '赵子龙',
+        age: 26
+      },
+    },
+    {
+      provide: 'school',
+      useFactory() {
+        return {
+          name: 'scut',
+          address: '广州',
+        }
+      },
+    },
+    {
+      provide: 'info',
+      useFactory(person: {name: string; age: number}, appService: AppService) {
+        return {
+          desc: person.name + person.age,
+          say: appService.getHello(),
+        }
+      },
+      inject: ['person', AppService],
+    }
+  ],
 })
 export class AppModule {}
