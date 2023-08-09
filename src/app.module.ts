@@ -5,9 +5,12 @@ import { AModule } from './a/a.module';
 import { CController } from './c/c.controller';
 import { RModule } from './r/r.module';
 import { PersonModule } from './person/person.module';
+import { AaaModule } from './aaa/aaa.module';
+import { BbbModule } from './bbb/bbb.module';
+import { CccModule } from './ccc/ccc.module';
 
 @Module({
-  imports: [AModule, RModule, PersonModule],
+  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule],
   controllers: [AppController, CController],
   providers: [
     {
