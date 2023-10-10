@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles, UseFilters, HttpException, HttpStatus } from '@nestjs/common';
 import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
-
+import { PersonFilter } from './person.filter';
 @Controller('person')
 export class PersonControllers {
   constructor(private readonly personService: PersonService) {}
@@ -43,7 +43,9 @@ export class PersonController {
   }
 
   @Get(':id')
+  @UseFilters(PersonFilter)
   urlParam(@Param('id') id: string) {
+    throw new HttpException('789', HttpStatus.BAD_REQUEST);
     return `received: id=${id}`;
   }
 
