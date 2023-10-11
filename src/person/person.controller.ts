@@ -1,9 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles, UseFilters, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles, UseFilters, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { PersonFilter } from './person.filter';
+import { ExampleFilter } from "./example.filter";
+import { ExampleException } from './ExampleException'
+import { ExampleGuard } from './example.guard';
+import { Roles } from './roles.decorator';
+import { Role } from './role';
 @Controller('person')
 export class PersonControllers {
   constructor(private readonly personService: PersonService) {}
@@ -38,7 +43,11 @@ export class PersonControllers {
 export class PersonController {
 
   @Get('find')
+  @UseFilters(ExampleFilter)
+  @UseGuards(ExampleGuard)
+  @Roles(Role.Admin)
   urlQuery(@Query('name') name: string, @Query('age') age: number) {
+    throw new ExampleException('exceptionA', 'exceptionB');
     return `received: name=${name}, age=${age}`;
   }
 
