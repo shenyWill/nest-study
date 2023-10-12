@@ -8,9 +8,10 @@ import { PersonModule } from './person/person.module';
 import { AaaModule } from './aaa/aaa.module';
 import { BbbModule } from './bbb/bbb.module';
 import { CccModule } from './ccc/ccc.module';
+import { SchoolModule } from './school/school.module';
 
 @Module({
-  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule],
+  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule],
   controllers: [AppController, CController],
   providers: [
     {
