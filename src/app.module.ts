@@ -9,9 +9,11 @@ import { AaaModule } from './aaa/aaa.module';
 import { BbbModule } from './bbb/bbb.module';
 import { CccModule } from './ccc/ccc.module';
 import { SchoolModule } from './school/school.module';
+import { TestAModule } from './test-a/test-a.module';
+import { TestBModule } from './test-b/test-b.module';
 
 @Module({
-  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule],
+  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule],
   controllers: [AppController, CController],
   providers: [
     {
