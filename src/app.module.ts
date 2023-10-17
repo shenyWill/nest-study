@@ -11,9 +11,14 @@ import { CccModule } from './ccc/ccc.module';
 import { SchoolModule } from './school/school.module';
 import { TestAModule } from './test-a/test-a.module';
 import { TestBModule } from './test-b/test-b.module';
+import { TestDynamicModuleModule } from './test-dynamic-module/test-dynamic-module.module';
+import { TestDynamicOtherModuleModule } from './test-dynamic-other-module/test-dynamic-other-module.module';
 
 @Module({
-  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule],
+  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule, TestDynamicModuleModule.register({info: '这是一个动态module'}), TestDynamicOtherModuleModule.register({
+    name: 'zhangsan',
+    age: 23
+  })],
   controllers: [AppController, CController],
   providers: [
     {
