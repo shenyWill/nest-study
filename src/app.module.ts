@@ -1,8 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AModule } from './a/a.module';
-import { CController } from './c/c.controller';
 import { RModule } from './r/r.module';
 import { PersonModule } from './person/person.module';
 import { AaaModule } from './aaa/aaa.module';
@@ -13,13 +11,14 @@ import { TestAModule } from './test-a/test-a.module';
 import { TestBModule } from './test-b/test-b.module';
 import { TestDynamicModuleModule } from './test-dynamic-module/test-dynamic-module.module';
 import { TestDynamicOtherModuleModule } from './test-dynamic-other-module/test-dynamic-other-module.module';
+import { TestMiddlewareOneMiddleware } from './test-middleware-one.middleware';
 
 @Module({
-  imports: [AModule, RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule, TestDynamicModuleModule.register({info: '这是一个动态module'}), TestDynamicOtherModuleModule.register({
+  imports: [RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule, TestDynamicModuleModule.register({info: '这是一个动态module'}), TestDynamicOtherModuleModule.register({
     name: 'zhangsan',
     age: 23
   })],
-  controllers: [AppController, CController],
+  controllers: [AppController],
   providers: [
     {
       provide: AppService,
@@ -53,4 +52,12 @@ import { TestDynamicOtherModuleModule } from './test-dynamic-other-module/test-d
     }
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // consumer.apply(TestMiddlewareOneMiddleware).forRoutes('*');
+    consumer.apply(TestMiddlewareOneMiddleware).forRoutes({
+      path: 'school/custom',
+      method: RequestMethod.GET
+    })
+  }
+}
