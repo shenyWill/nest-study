@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, SetMetadata, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, SetMetadata, UseGuards, UseInterceptors, Query, ParseIntPipe, ParseArrayPipe } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
@@ -68,6 +68,16 @@ export class SchoolController {
   async testRxTimeout() {
     await new Promise(resolve => setTimeout(() => resolve, 4000));
     return 'ddd';
+  }
+
+  @Get('test-pipe')
+  testPipe(@Query('age', ParseIntPipe) age: string): string {
+    return age + 1;
+  }
+
+  @Get('test-parseArrayPipe')
+  testParseArrayPipe(@Query('param', new ParseArrayPipe({items: Number})) param: Array<number>) {
+    return param.reduce((pre, next) => pre + next, 0)
   }
 
 
