@@ -12,6 +12,7 @@ import { TestRxjsTwoInterceptor } from 'src/test-rxjs-two.interceptor';
 import { TestRxjsTapInterceptor } from 'src/test-rxjs-tap.interceptor';
 import { TestRxjsCatchErrorInterceptor } from 'src/test-rxjs-catch-error.interceptor';
 import { TestRxjsTimeoutInterceptor } from 'src/test-rxjs-timeout.interceptor';
+import { TestPipe } from 'src/test.pipe';
 
 @Controller('school')
 export class SchoolController {
@@ -80,8 +81,13 @@ export class SchoolController {
     return param.reduce((pre, next) => pre + next, 0)
   }
 
+  @Get('test-my-pipe')
+  testMyPipe(@Query('name', TestPipe) name) {
+    return name;
+  }
 
-  @Get('myquery')
+
+  @Get('my-query')
   testMyQuery(@MyQuery('name') name, @MyQuery('age') age) {
     return `这是测试自定义Query装饰器 => name: ${name}; age: ${age}`
   }
