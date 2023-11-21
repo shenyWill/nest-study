@@ -12,12 +12,13 @@ import { TestBModule } from './test-b/test-b.module';
 import { TestDynamicModuleModule } from './test-dynamic-module/test-dynamic-module.module';
 import { TestDynamicOtherModuleModule } from './test-dynamic-other-module/test-dynamic-other-module.module';
 import { TestMiddlewareOneMiddleware } from './test-middleware-one.middleware';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule, TestDynamicModuleModule.register({info: '这是一个动态module'}), TestDynamicOtherModuleModule.register({
     name: 'zhangsan',
     age: 23
-  })],
+  }), AddressModule],
   controllers: [AppController],
   providers: [
     {
