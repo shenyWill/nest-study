@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { AddressController } from './address.controller';
 import { APP_PIPE } from '@nestjs/core';
-import { MyValidationPipe } from './my-validate';
+// import { MyValidationPipe } from './my-validate';
 
 @Module({
   controllers: [AddressController],
@@ -16,10 +16,10 @@ import { MyValidationPipe } from './my-validate';
       }
     }
   },
-  {
-    provide: APP_PIPE,
-    useClass: MyValidationPipe,
-  }
+  // {
+  //   provide: APP_PIPE,
+  //   useClass: MyValidationPipe,
+  // }
 ]
 })
 export class AddressModule {}
