@@ -5,7 +5,9 @@ import { join } from 'path';
 import { HelloFilter } from './hello.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true
+  });
   app.useStaticAssets(join(__dirname, '..', 'public'), { prefix: '/static' })
 
   // app.useGlobalFilters(new HelloFilter());
