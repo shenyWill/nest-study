@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+</head>
+<body>
+  <input type="file" id="fileInput" multiple />
+  <script>
+    const fileInput = document.querySelector('#fileInput');
+
+    async function formData() {
+      const data = new FormData();
+      data.set('name', '赵子龙');
+      data.set('age', 23);
+      // data.set('test-upload', fileInput.files[0]);
+      [...fileInput.files].forEach(item => {
+        data.set('test-upload', item);
+      })
+
+      const res = await axios.post('http://localhost:3000/test-multer-upload/test-multer-upload-two', data);
+      console.log(res);
+    }
+    fileInput.onchange = formData;
+  </script>
+</body>
+</html>

@@ -14,12 +14,13 @@ import { TestDynamicOtherModuleModule } from './test-dynamic-other-module/test-d
 import { TestMiddlewareOneMiddleware } from './test-middleware-one.middleware';
 import { AddressModule } from './address/address.module';
 import { TestExceptionFilterModule } from './test-exception-filter/test-exception-filter.module';
+import { TestMulterUploadModule } from './test-multer-upload/test-multer-upload.module';
 
 @Module({
   imports: [RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule, TestDynamicModuleModule.register({info: '这是一个动态module'}), TestDynamicOtherModuleModule.register({
     name: 'zhangsan',
     age: 23
-  }), AddressModule, TestExceptionFilterModule],
+  }), AddressModule, TestExceptionFilterModule, TestMulterUploadModule],
   controllers: [AppController],
   providers: [
     {
