@@ -13,6 +13,13 @@ export class TestLoggerController {
     return this.testLoggerService.create(createTestLoggerDto);
   }
 
+  @Post('log')
+  log(@Body() body) {
+    console.log('==============log===============');
+    console.log(body);
+    return 123;
+  }
+
   @Get()
   findAll() {
     this.logger.debug('aaa', TestLoggerController.name);
