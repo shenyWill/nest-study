@@ -13,6 +13,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'), { prefix: '/static' })
 
   // app.useGlobalFilters(new HelloFilter());
+  app.useLogger(new MyLogger());
 
   await app.listen(3000);
   // setTimeout(() => {

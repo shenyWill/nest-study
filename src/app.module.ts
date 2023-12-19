@@ -16,12 +16,13 @@ import { AddressModule } from './address/address.module';
 import { TestExceptionFilterModule } from './test-exception-filter/test-exception-filter.module';
 import { TestMulterUploadModule } from './test-multer-upload/test-multer-upload.module';
 import { TestLoggerModule } from './test-logger/test-logger.module';
+import { TestWinstonModule } from './test-winston/test-winston.module';
 
 @Module({
   imports: [RModule, PersonModule, AaaModule, BbbModule, CccModule, SchoolModule, TestAModule, TestBModule, TestDynamicModuleModule.register({info: '这是一个动态module'}), TestDynamicOtherModuleModule.register({
     name: 'zhangsan',
     age: 23
-  }), AddressModule, TestExceptionFilterModule, TestMulterUploadModule, TestLoggerModule],
+  }), AddressModule, TestExceptionFilterModule, TestMulterUploadModule, TestLoggerModule, TestWinstonModule],
   controllers: [AppController],
   providers: [
     {
